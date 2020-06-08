@@ -1,3 +1,3 @@
 export const main = () => {
-    // aquí tu código
-}
+  // aquí tu código
+};
