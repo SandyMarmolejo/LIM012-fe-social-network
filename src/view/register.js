@@ -6,25 +6,25 @@ const register = () => {
 
 <main class="access-register-container">
     <p class="message-register">Regístrate</p>
-    <form class="register">
+    <form class="form-register">
         <p>
-            <input type="text" id="txtNameSignUp" class="field-to-complete" placeholder="Nombre y Apellido" />
+            <input type="text" id="txtNameSignUp" class="field-to-complete" placeholder="Nombre y Apellido" required/>
         </p>
         <p>
-            <input type="text" id="txtEmailSignUp" class="field-to-complete" placeholder="Email" />
+            <input type="text" id="txtEmailSignUp" class="field-to-complete" placeholder="Email" required/>
         </p>
         <p>
-            <input type="text" id="txtPasswordSignUp" class="field-to-complete" placeholder="Contraseña" />
+            <input type="text" id="txtPasswordSignUp" class="field-to-complete" placeholder="Contraseña" required/>
         </p>
         <p>
-            <input type="checkbox" value="Terminos" /> <label>Acepto términos, condiciones y política de privacidadr</label>
+            <input type="checkbox" value="Terminos" /> <label>Acepto términos, condiciones y política de privacidad required</label>
         </p>
-        <input type="button" value="Register" id="btnRegister" />
+        <button href="#/registro" id="btnRegister" class="btn-register">Regístrate</button>
     </form>
 
     <div class="question-container">
     <p class="message-question">¿Ya tienes una cuenta?</p>
-    <a href="#/login" class="press">Inicia sesión</a>
+    <a href="#/login" id="btnViewLogIn" class="text-init-session">Inicia sesión</a>
     </div>
 </main>
 `;
@@ -32,6 +32,11 @@ const register = () => {
   const divRegister = document.createElement('div');
   // Añadimos una cadena de texto
   divRegister.innerHTML = viewRegister;
+
+  // Creando una cuenta de usuario
+  const formRegister = divRegister.querySelector('.form-register');
+  formRegister.addEventListener('submit');
+
 
   return divRegister;
 };

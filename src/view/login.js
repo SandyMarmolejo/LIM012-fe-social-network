@@ -9,10 +9,10 @@ const login = () => {
     <p class="message-welcome">Bienvenido a Tow, la red que conecta viajeros en el mundo</p>
     <form class="login">
         <p>
-            <input type="text"  id="txtLoginEmail" class="fill-to-complete" placeholder="Email" />
+            <input type="text"  id="txtLoginEmail" class="fill-to-complete" placeholder="Email" required/>
         </p>
         <p>
-            <input type="text" id="txtloginPassword" class="fill-to-complete" placeholder="Password" />
+            <input type="text" id="txtloginPassword" class="fill-to-complete" placeholder="Password" required/>
         </p>
         <p>
             <button type="button" id="btnLogin" class="btn-login">Login</button>
@@ -25,7 +25,7 @@ const login = () => {
     </div>
     <div class="question-container">
       <p class="message-question">No tienes una cuenta?</p>
-      <a href="#/signup" class="press">Registrate</a>
+      <a href="#/register" id="btnViewSignUp" class="txt-sign-up">Regístrate</a>
     </div>
   </main>
 `;
