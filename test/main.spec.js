@@ -1,7 +1,7 @@
-import { main } from '../src/main.js';
+import { components } from '../src/view/index.js';
 
 describe('main', () => {
   it('debería ser una función', () => {
-    expect(typeof main).toBe('function');
+    expect(typeof components.login).toBe('function');
   });
 });

@@ -35,8 +35,8 @@ const register = () => {
 
   // Creando una cuenta de usuario
   const formRegister = divRegister.querySelector('#formRegister');
-  formRegister.addEventListener('submit', (e) => {
-      console.log(e);
+  formRegister.addEventListener('submit', () => {
+    // console.log(e);
   });
 
   return divRegister;
