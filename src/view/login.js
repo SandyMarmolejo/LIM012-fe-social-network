@@ -1,6 +1,6 @@
 const login = () => {
-  const view = `
 
+  const viewLogin = `
   <header class="logo-container">
     <h1 class="title-logo">TRAVEL OF WORLD</h1>
   </header>
@@ -29,13 +29,13 @@ const login = () => {
     </div>
   </main>
 `;
-  return view;
+
+  // Creando un elemento nodo de tipo div
+  const divLogin = document.createElement('div');
+  //Añadimos una cadena de texto
+ divLogin.innerHTML = viewLogin;
+  
+  return divLogin;
 };
 
 export default login;
-
-
-
-
-
-  

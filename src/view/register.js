@@ -1,5 +1,5 @@
 const register = () => {
-  const view = `
+  const viewRegister = `
 <header class="logo-container">
     <h1 class="title-logo">TRAVEL OF WORLD</h1>
 </header>
@@ -28,7 +28,12 @@ const register = () => {
     </div>
 </main>
 `;
-  return view;
+  // Creando un elemento nodo de tipo div
+  const divRegister = document.createElement('div');
+  // Añadimos una cadena de texto
+  divRegister.innerHTML = viewRegister;
+
+  return divRegister;
 };
 
 export default register;
