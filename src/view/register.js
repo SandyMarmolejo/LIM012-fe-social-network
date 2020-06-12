@@ -6,7 +6,7 @@ const register = () => {
 
 <main class="access-register-container">
     <p class="message-register">Regístrate</p>
-    <form class="form-register">
+    <form id="formRegister" class="form-register">
         <p>
             <input type="text" id="txtNameSignUp" class="field-to-complete" placeholder="Nombre y Apellido" required/>
         </p>
@@ -34,9 +34,10 @@ const register = () => {
   divRegister.innerHTML = viewRegister;
 
   // Creando una cuenta de usuario
-  const formRegister = divRegister.querySelector('.form-register');
-  formRegister.addEventListener('submit');
-
+  const formRegister = divRegister.querySelector('#formRegister');
+  formRegister.addEventListener('submit', (e) => {
+      console.log(e);
+  });
 
   return divRegister;
 };
