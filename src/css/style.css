@@ -20,7 +20,24 @@ h1{
     color:#D12ECB;
 }
 
-.message{
+.message-register{
+    position: absolute;
+    width: 724px;
+    height: 207px;
+    left: 503px;
+    top: 50px;
+    font-family: Ribeye Marrow;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color:#D12ECB;
+}
+
+.message-welcome{
    position: absolute;
    width: 392px;
    height: 54px;
@@ -46,6 +63,18 @@ h1{
    
 }
 
+.email-register{
+    position: absolute;
+    width: 295px;
+    height: 66px;
+    left: 503px;
+    top: 300px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    border: 1px  solid #43B1AB
+   
+}
+
 .password-login{
     position: absolute;
     width: 295px;
@@ -58,6 +87,32 @@ h1{
     
      
 }
+.password-register{
+    position: absolute;
+    width: 295px;
+    height: 66px;
+    left: 503px;
+    top: 400px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    border: 1px  solid #43B1AB
+    
+     
+}
+
+.name-register{
+    position: absolute;
+    width: 295px;
+    height: 66px;
+    left: 503px;
+    top: 200px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    border: 1px  solid #43B1AB
+    
+     
+}
+
 
 .btn-initsession{
     position: absolute;
@@ -73,7 +128,22 @@ h1{
     cursor: pointer;
 }
 
-.message1{
+
+.btn-register{
+    position: absolute;
+    width: 121px;
+    height: 52px;
+    left: 581px;
+    top: 500px;
+    background:  #43B1AB;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 1.6 em;
+    color: white;
+    cursor: pointer;
+}
+
+.message-options{
     position: absolute;
     width: 255px;
     height: 27px;
@@ -103,7 +173,7 @@ h1{
    top: 650px;
 }
 
-.message2{
+.message-question{
    position: absolute;
    width: 290px;
    height: 30px;
@@ -117,7 +187,8 @@ h1{
    color: #000000;
 }
 
-.btn-signup{
+
+.btn-signup {
     position: absolute;
     width: 290px;
     height: 30px;
@@ -131,7 +202,31 @@ h1{
     cursor: pointer;
 }
 
-.email-login::placeholder, .password-login::placeholder{
+.text-init-session{
+    position: absolute;
+    width: 290px;
+    height: 30px;
+    left: 700px;
+    top: 710px;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 1.6 em;
+    color: fuchsia;
+    cursor: point
+
+}
+
+
+.email-login::placeholder, 
+.password-login::placeholder,
+.name-register::placeholder, 
+.email-register::placeholder, 
+.password-register::placeholder
+{
     color: #43B1AB;
     border-radius: 100px;
 }
+
+
+
+

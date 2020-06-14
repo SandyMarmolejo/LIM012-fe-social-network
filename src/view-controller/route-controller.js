@@ -8,6 +8,8 @@ const changeView = (route) => {
     { return container.appendChild(components.login()); }
     case '#/registro':
     { return container.appendChild(components.registro()); }
+    case '#/profile':
+      { return container.appendChild(components.profile()); }
     default:
     { window.location.hash = '/login';
       break;

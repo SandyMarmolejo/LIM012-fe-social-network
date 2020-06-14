@@ -1,3 +1,4 @@
+
 // eslint-disable-next-line max-len
 const signIn = (emailLogIn, passwordLogIn) => firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn);
 
