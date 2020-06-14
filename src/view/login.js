@@ -1,12 +1,9 @@
 const login = () => {
   const viewLogin = `
-  <header class="logo-container">
-    <h1 class="title-logo">TRAVEL OF WORLD</h1>
-  </header>
-
-  <main class="access-login-container">
+  <div class="signin-container">
+  <h1>TRAVEL OF WORLD</h1>
     <p class="message-welcome">Bienvenido a Tow, la red que conecta viajeros en el mundo</p>
-    <form class="login">
+    <form class="form-login">
         <p>
             <input type="text"  id="txtLoginEmail" class="fill-to-complete" placeholder="Email" required/>
         </p>
@@ -19,14 +16,15 @@ const login = () => {
     </form>
     <p class="message-options">O ingresa con</p>
     <div class="login-networks">
-      <p id="fabGoogle"><i class="fab-google"></i></p>
-      <p id="fabFacebook"><i class="fab-facebook"></i></p>
+     <i class="fab fa-facebook-f"></i>
+     <i class="fab fa-google-plus-g" id="btnLogInGoogle" ></i>
     </div>
     <div class="question-container">
       <p class="message-question">No tienes una cuenta?</p>
       <a href="#/register" id="btnViewSignUp" class="txt-sign-up">Regístrate</a>
     </div>
   </main>
+  </div>
 `;
 
   // Creando un elemento nodo de tipo div

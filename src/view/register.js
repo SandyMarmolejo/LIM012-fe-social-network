@@ -1,10 +1,7 @@
 const register = () => {
   const viewRegister = `
-<header class="logo-container">
-    <h1 class="title-logo">TRAVEL OF WORLD</h1>
-</header>
-
-<main class="access-register-container">
+  <h1 class="title-logo">TRAVEL OF WORLD</h1>
+  <main class="access-register-container">
     <p class="message-register">Regístrate</p>
     <form id="formRegister" class="form-register">
         <p>
@@ -36,7 +33,6 @@ const register = () => {
   // Creando una cuenta de usuario
   const formRegister = divRegister.querySelector('#formRegister');
   formRegister.addEventListener('submit', () => {
-    // console.log(e);
   });
 
   return divRegister;
