@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    position: absolute;
+    width: 724px;
+    height: 207px;
+    left: 503px;
+    top: 50px;
+    font-family: Ribeye Marrow;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color:#D12ECB;
+}
+
+.message{
+   position: absolute;
+   width: 392px;
+   height: 54px;
+   left: 471px;
+   top: 200px;
+   font-family: Roboto;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 18px;
+   line-height: 150%;
+   color: #43B1AB;
+
+}
+.email-login{
+    position: absolute;
+    width: 295px;
+    height: 66px;
+    left: 503px;
+    top: 300px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    border: 1px  solid #43B1AB
+   
+}
+
+.password-login{
+    position: absolute;
+    width: 295px;
+    height: 66px;
+    left: 503px;
+    top: 400px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    border: 1px  solid #43B1AB
+    
+     
+}
+
+.btn-initsession{
+    position: absolute;
+    width: 121px;
+    height: 52px;
+    left: 581px;
+    top: 500px;
+    background:  #43B1AB;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 1.6 em;
+    color: white;
+    cursor: pointer;
+}
+
+.message1{
+    position: absolute;
+    width: 255px;
+    height: 27px;
+    left: 548px;
+    top: 600px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 150%;
+    color: #000000;
+}
+
+.btn-facebook{
+   position: absolute; 
+   width: 48px;
+   height: 48px;
+   left: 560px;
+   top: 650px;
+}
+
+.btn-Google{
+   position: absolute;
+   width: 48px;
+   height: 48px;
+   left: 640px;
+   top: 650px;
+}
+
+.message2{
+   position: absolute;
+   width: 290px;
+   height: 30px;
+   left: 512px;
+   top: 710px;
+   font-family: Roboto;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 18px;
+   line-height: 150%;
+   color: #000000;
+}
+
+.btn-signup{
+    position: absolute;
+    width: 290px;
+    height: 30px;
+    left: 700px;
+    top: 710px;
+    background:  #43B1AB;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 1.6 em;
+    color: white;
+    cursor: pointer;
+}
+
+.email-login::placeholder, .password-login::placeholder{
+    color: #43B1AB;
+    border-radius: 100px;
+}
