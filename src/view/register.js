@@ -14,7 +14,7 @@ const register = () => {
             <input type="text" id="txtPasswordSignUp" class="field-to-complete" placeholder="Contraseña" required/>
         </p>
         <p>
-            <input type="checkbox" value="Terminos" /> <label>Acepto términos, condiciones y política de privacidad required</label>
+            <input type="checkbox" value="Terminos" /> <label>Acepto términos, condiciones y política de privacidad</label>
         </p>
         <button href="#/registro" id="btnRegister" class="btn-register">Regístrate</button>
     </form>
