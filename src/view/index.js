@@ -2,6 +2,7 @@ import Login from './login.js';
 import Registro from './registro.js';
 import Home from './home.js';
 import Profile from './profile.js';
+import NotFound from './notFound.js';
 
 
 const components = {
@@ -9,6 +10,7 @@ const components = {
   registro: Registro,
   home: Home,
   profile: Profile,
+  notFound: NotFound
 
 };
 
