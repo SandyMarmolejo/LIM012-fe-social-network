@@ -1,14 +1,16 @@
-// eslint-disable-next-line import/no-unresolved
+
 import { changeView } from './view-controller/route-controller.js';
 
-// example();
-const initPathBase = () => {
+const init = () => {
+  // Para que se haga un cambio cuando se recarga la página
   changeView(window.location.hash);
+  // Para que se haga un cambio cuando se elige una seccion
   window.addEventListener('hashchange', () => changeView(window.location.hash));
 };
-window.addEventListener('load', initPathBase);
 
-const init = () => {
+window.addEventListener('load', init);
+
+const initConfig = () => {
 // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: 'AIzaSyDitiLTK8jr-8onhXUWSHHzsBks3i9H2iI',
@@ -22,4 +24,5 @@ const init = () => {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 };
-window.onload = init();
+window.onload = initConfig();
+

@@ -1,8 +1,7 @@
-export default () => {
-    const viewNotFound = document.createElement('div');
-    viewNotFound.classList.add('mistake');
-    viewNotFound.innerHTML = `
-    <div class="mistake">
+
+const notFound = () => {
+  const viewNotFound = `
+        <div class="mistake">
         <div class="body-mistake">
           <h2>Oops!, Pagina no encontrada...</h2>
           <P>Se produjo un error inesperado. </P>
@@ -13,8 +12,14 @@ export default () => {
          <div>
          
     </div>
-       
-            `;
-  
-    return viewNotFound;
-  };
+    `;
+  // Creando un elemento nodo de tipo div
+  const divNotFound = document.createElement('div');
+  // Añadimos una cadena de texto
+  divNotFound.innerHTML = viewNotFound;
+
+  return divNotFound;
+};
+
+export default notFound;
+
