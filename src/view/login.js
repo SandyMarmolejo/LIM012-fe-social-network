@@ -1,6 +1,4 @@
 
-import { signingInGoogle } from '../view-controller/login-controller.js';
-
 const login = () => {
   const viewLogin = `
   <div class="signin-container">
@@ -8,10 +6,10 @@ const login = () => {
     <p class="message-welcome">Bienvenido a Tow, la red que conecta viajeros en el mundo</p>
     <form class="form-login">
         <p>
-            <input type="text"  id="txtLoginEmail" class="fill-to-complete" placeholder="Email" required/>
+            <input type="text"  id="txtLoginEmail" class="email-login" placeholder="Email" required/>
         </p>
         <p>
-            <input type="text" id="txtloginPassword" class="fill-to-complete" placeholder="Password" required/>
+            <input type="text" id="txtloginPassword" class="password-login" placeholder="Password" required/>
         </p>
         <p>
             <button type="button" id="btnLogin" class="btn-login">Login</button>
@@ -35,10 +33,7 @@ const login = () => {
   // Añadimos una cadena de texto
   divLogin.innerHTML = viewLogin;
   
-  // Iniciar sesión con Google
-  const btnLogInGoogle = viewLogin.querySelector('#btnLogInGoogle');
-  btnLogInGoogle.addEventListener('click', signingInGoogle);
-    
+  
   return divLogin;
 };
 
