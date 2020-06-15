@@ -21,23 +21,6 @@ h1{
     color:#D12ECB;
 }
 
-.message-register{
-    position: absolute;
-    width: 724px;
-    height: 207px;
-    left: 503px;
-    top: 50px;
-    font-family: Ribeye Marrow;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 48px;
-    line-height: 150%;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color:#D12ECB;
-}
-
 .message-welcome{
    position: absolute;
    width: 392px;
@@ -63,6 +46,7 @@ h1{
     border: 1px  solid #43B1AB
    
 }
+
 
 .email-register{
     position: absolute;
@@ -113,9 +97,7 @@ h1{
     
      
 }
-
-
-.btn-initsession{
+.btn-login{
     position: absolute;
     width: 121px;
     height: 52px;
@@ -128,6 +110,7 @@ h1{
     color: white;
     cursor: pointer;
 }
+
 
 
 .btn-register{
@@ -202,8 +185,20 @@ h1{
     color: white;
     cursor: pointer;
 }
+.txt-sign-up{
+    position: absolute;
+    width: 290px;
+    height: 30px;
+    left: 700px;
+    top: 710px;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 1.6 em;
+    color: fuchsia;
+    cursor: point
 
-.text-init-session{
+}
+.txt-init-session{
     position: absolute;
     width: 290px;
     height: 30px;
@@ -217,8 +212,7 @@ h1{
 
 }
 
-
-.email-login::placeholder, 
+.email-logins::placeholder, 
 .password-login::placeholder,
 .name-register::placeholder, 
 .email-register::placeholder, 

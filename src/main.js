@@ -10,19 +10,28 @@ const init = () => {
 
 window.addEventListener('load', init);
 
+
 const initConfig = () => {
-// Your web app's Firebase configuration
   const firebaseConfig = {
-    apiKey: 'AIzaSyDitiLTK8jr-8onhXUWSHHzsBks3i9H2iI',
-    authDomain: 'red-social-1ce91.firebaseapp.com',
-    databaseURL: 'https://red-social-1ce91.firebaseio.com',
-    projectId: 'red-social-1ce91',
-    storageBucket: 'red-social-1ce91.appspot.com',
-    messagingSenderId: '1003027157066',
-    appId: '1:1003027157066:web:c4fe8aab6583d7573296b3',
+
+    apiKey: "AIzaSyDVsk1VMH790IMmi9jqlU00qI_2qng_rx0",
+    authDomain: "red-social-lim012.firebaseapp.com",
+    databaseURL: "https://red-social-lim012.firebaseio.com",
+    projectId: "red-social-lim012",
+    storageBucket: "red-social-lim012.appspot.com",
+    messagingSenderId: "125591269748",
+    appId: "1:125591269748:web:7a00856d995d9dc2cebc21"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 };
+
 window.onload = initConfig();
+
+
+
+
+
+
+
 
