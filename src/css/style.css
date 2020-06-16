@@ -233,3 +233,20 @@ body{
 }
 
 
+i.anc-fa { 
+    background: url(../images/facebook.png);
+    width: 26px;
+    height: 19px;
+    display: inline-block;
+    padding: 13px 13px;
+    z-index:999 ;
+    margin: 0 -10px;
+  }
+
+  i.anc-go {
+    background: url(../images/google.png);
+    width: 20px;
+    height: 19px;
+    display: inline-block;
+    padding: 13px 13px;
+  }

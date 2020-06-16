@@ -32,6 +32,7 @@ const register = () => {
 
   // Creando una cuenta de usuario
   const formRegister = divRegister.querySelector('#formRegister');
+
   formRegister.addEventListener('submit', () => {
   });
 
