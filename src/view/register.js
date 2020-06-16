@@ -30,9 +30,31 @@ const register = () => {
   // Añadimos una cadena de texto
   divRegister.innerHTML = viewRegister;
 
-  // Creando una cuenta de usuario
-  const formRegister = divRegister.querySelector('#formRegister');
-  formRegister.addEventListener('submit', () => {
+  const getName = () => document.getElementById('txtNameSignUp').value;
+
+  const getEmail = () => document.getElementById('txtEmailSignUp').value;
+
+  const getPassword = () => document.getElementById('txtPasswordSignUp').value;
+
+  const sendData = divRegister.querySelector('#formRegister');
+  sendData.addEventListener('submit', () => {
+    const nameEntered = getName();
+    localStorage.name = nameEntered;
+
+    const emailEntered = getEmail();
+    localStorage.email = emailEntered;
+
+    const passwordEntered = getPassword();
+    localStorage.password = passwordEntered;
+
+    // console.log(`nombre=${nameEntered}email=${emailEntered}contraseña=${passwordEntered}`);
+
+    firebase.auth().createUserWithEmailAndPassword(emailEntered, passwordEntered)
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorCode, errorMessage);
+      });
   });
 
   return divRegister;
