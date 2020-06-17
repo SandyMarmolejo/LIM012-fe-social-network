@@ -1,12 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>TRAVEL OF WORLD</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-  <script type="module" src="index.js"></script>
+  <section id="container"></section>
+
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-storage.js"></script>
+ 
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyDVsk1VMH790IMmi9jqlU00qI_2qng_rx0",
+    authDomain: "red-social-lim012.firebaseapp.com",
+    databaseURL: "https://red-social-lim012.firebaseio.com",
+    projectId: "red-social-lim012",
+    storageBucket: "red-social-lim012.appspot.com",
+    messagingSenderId: "125591269748",
+    appId: "1:125591269748:web:7a00856d995d9dc2cebc21"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+ 
+
+
+
+
+
+
+  <script type="module" src="./main.js"></script>
 </body>
+
 </html>
