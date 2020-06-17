@@ -32,5 +32,10 @@
     "serve": "^11.0.2",
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0"
+  },
+  "dependencies": {
+    "firebase": "^7.14.2",
+    "firebaseui": "^4.5.1",
+    "node-sass": "^4.14.1"
   }
 }
