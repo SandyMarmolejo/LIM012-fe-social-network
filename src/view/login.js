@@ -1,4 +1,3 @@
-
 const login = () => {
   const viewLogin = `
  
@@ -53,7 +52,3 @@ const login = () => {
 };
 
 export default login;
-     
- 
-  
-

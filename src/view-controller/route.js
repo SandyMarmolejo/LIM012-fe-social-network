@@ -12,10 +12,6 @@ const changeView = (route) => {
     { return container.appendChild(components.login()); }
     case '#/register':
     { return container.appendChild(components.register()); }
-    case '#/profile':
-    { return container.appendChild(components.profile()); }
-    case '#/notFound':
-    { return container.appendChild(components.notFound()); }
     default:
     { window.location.hash = '/login';
       break;
