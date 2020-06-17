@@ -1,6 +1,3 @@
-
-import { signingInGoogle } from '../view-controller/login-controller.js';
-
 const login = () => {
   const viewLogin = `
   <div class="signin-container">
@@ -34,16 +31,8 @@ const login = () => {
   const divLogin = document.createElement('div');
   // Añadimos una cadena de texto
   divLogin.innerHTML = viewLogin;
-  
-  // Iniciar sesión con Google
-  const btnLogInGoogle = viewLogin.querySelector('#btnLogInGoogle');
-  btnLogInGoogle.addEventListener('click', signingInGoogle);
-    
+
   return divLogin;
 };
 
 export default login;
-     
- 
-  
-
