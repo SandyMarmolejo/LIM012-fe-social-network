@@ -20,7 +20,6 @@ img{max-width:100%;}
 body{
   
 	font-family: 'Open Sans', sans-serif;
-	background: url(./images/tow1.png)no-repeat 0px 0px; 
     min-height: 900px;
     background-color: #d7d7d7;
     color: #565656;
@@ -199,7 +198,7 @@ label.checkbox {
 	color: #2da5da;
 }
 .forgot.checkbox input:checked + i,
-.forgot . input:checked + i {
+.forgot .input:checked + i {
 	border-color: #2da5da;	
 }
 .forgot .rating input:checked ~ label {
@@ -414,4 +413,79 @@ h3 {
   -webkit-transition: 0.5s all;
   -moz-transition: 0.5s all;
   -o-transition: 0.5s all;
+}
+
+
+  
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #E9ECF4;
+	color: #000;
+	font-family: 'Roboto', sans-serif;
+}
+
+.contenedor {
+	width: 90%;
+	max-width: 1000px;
+	margin: 20px auto;
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(4, auto);
+
+	grid-template-areas: "header header header"
+						 "contenido contenido sidebar"
+						 "widget-1 widget-2 sidebar"
+						 "footer footer footer";
+}
+
+.contenedor > div,
+.contenedor .header,
+.contenedor .contenido,
+.contenedor .sidebar,
+.contenedor .footer {
+	background: #fff;
+	padding: 20px;
+	border-radius: 4px;
+}
+
+.contenedor .header {
+	background: #12203E;
+  color: #fff;
+	grid-area: header;
+}
+
+.barra{
+  color:white;
+}
+
+.contenedor .contenido {
+	grid-area: contenido;
+}
+
+.contenedor .sidebar {
+	grid-column: 3 / 4;
+	background: #fAA43D;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100px;
+	grid-area: sidebar;
+}
+
+
+
+@media screen and (max-width: 768px){
+	.contenedor {
+		grid-template-areas: "header header header"
+						 "contenido contenido contenido"
+						 "sidebar sidebar sidebar"
+						 
+						
+	}
 }
