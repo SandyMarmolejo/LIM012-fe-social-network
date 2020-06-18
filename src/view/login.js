@@ -1,3 +1,5 @@
+import {signingIn , signingInGoogle} from '../view-controller/sigin-controller.js';
+
 const login = () => {
   const viewLogin = `
  
@@ -47,7 +49,32 @@ const login = () => {
   // Añadimos una cadena de texto
   divLogin.innerHTML = viewLogin;
   divLogin.classList.add('login');
-  
+
+  const btnLogin = divLogin.querySelector('#btnLogin');
+  const btnLogInFacebook = divLogin.querySelector('#btnLogInFacebook');
+  const btnLogInGoogle = divLogin.querySelector('#btnLogInGoogle');
+
+
+  btnLogin.addEventListener('click', () => {
+    const txtEmail =  divLogin.querySelector('#txtLoginEmail').value;
+    const txtPassword =  divLogin.querySelector('#txtloginPassword').value;
+
+    // console.log('txtEmail',txtEmail);
+    // console.log('txtPassword',txtPassword);
+
+    signingIn(txtEmail,txtPassword);
+    
+
+  });
+
+  btnLogInFacebook.addEventListener('click', () => {
+    console.log('btnLogInFacebook');
+  });
+
+  btnLogInGoogle.addEventListener('click', () => {
+    signingInGoogle();
+  });
+
   return divLogin;
 };
 

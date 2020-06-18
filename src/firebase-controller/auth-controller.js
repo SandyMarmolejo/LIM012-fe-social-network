@@ -21,17 +21,58 @@ export const logInGoogle = () => {
 // Usuario loggeado
 export const user = () => firebase.auth().currentUser;
 
+export const validation = callback => firebase.auth().onAuthStateChanged((user) => {
+  let _emailVerified = false;
+  if (user) {
+    if (user.emailVerified) {
+      _emailVerified = true;
+    }
+  }
+  return callback(_emailVerified);
+});
 
-// Guardando/actualizando nombre de usuario
-export const updateUserName = (userData, userName) => {
-  userData.updateProfile({
-    displayName: userName,
-  });
-};
 
-// Guardando/actualizando nombre de usuario
-export const updatePhotoAuth = (userData, photoProfile) => {
-  userData.updateProfile({
-    photoURL: photoProfile,
-  });
-};
+
+
+
+
+
+
+
+
+
+
+
+// export const validation = callback => firebase.auth().onAuthStateChanged((user) => {
+//   let route = '#/signin';
+//   if (window.location.hash === '#/signup') route = '#/signup';
+
+//   if (user) {
+//     if (user.emailVerified) {
+//       switch (window.location.hash) {
+//         case '#/profile': route = '#/profile';
+//           break;
+//         default: route = '#/home';
+//           break;
+//       }
+//     }
+//   }
+//   return callback(route);
+// });
+
+
+
+
+// // actualizar nombre de usuario
+// export const updateUserName = (userData, userName) => {
+//   userData.updateProfile({
+//     displayName: userName,
+//   });
+// };
+
+// // Guardando/actualizando nombre de usuario
+// export const updatePhotoAuth = (userData, photoProfile) => {
+//   userData.updateProfile({
+//     photoURL: photoProfile,
+//   });
+// };
