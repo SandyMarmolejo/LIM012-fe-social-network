@@ -1,4 +1,4 @@
-import { registerUser }  from '../view-controller/sigin-controller.js';
+import { registerUser } from '../view-controller/sigin-controller.js';
 
 
 const register = () => {
@@ -14,6 +14,10 @@ const register = () => {
   </form>
   <div class="login-bwn">
     <input type="submit" value="Regístrate" id="btnRegister">
+    <div id="divSuccefullyRegister" class="hide">
+      <h4>Te hemos enviado un correo. </h4>
+    </div>
+    <div id="divErrorRegister" class="hide"><h4>Ha ocurrido un error, por favor reintentalo. </h4></div>
   </div>
   <div class="login-bottom">
    
@@ -62,16 +66,22 @@ const register = () => {
   const btnRegister = divRegister.querySelector('#btnRegister');
 
   btnRegister.addEventListener('click', () => {
-    const txtName =  divRegister.querySelector('#txtNameSignUp').value;
-    const txtEmail =  divRegister.querySelector('#txtEmailSignUp').value;
-    const txtPassword =  divRegister.querySelector('#txtPasswordSignUp').value;
-    
-    console.log('txtName',txtName);
-    console.log('txtEmail',txtName);
-    console.log('txtPassword',txtName);
-    
-    registerUser(txtName, txtEmail, txtPassword);
+    const txtName = divRegister.querySelector('#txtNameSignUp').value;
+    const txtEmail = divRegister.querySelector('#txtEmailSignUp').value;
+    const txtPassword = divRegister.querySelector('#txtPasswordSignUp').value;
 
+    registerUser(txtName, txtEmail, txtPassword)
+    .then(() => {
+      document.getElementById('divErrorRegister').classList.add("hide");
+
+      document.getElementById('divSuccefullyRegister').classList.remove("hide");
+      document.getElementById('divSuccefullyRegister').classList.add("show");
+    }).catch(()=>{
+      document.getElementById('divSuccefullyRegister').classList.add("hide");
+
+      document.getElementById('divErrorRegister').classList.remove("hide");
+      document.getElementById('divErrorRegister').classList.add("show");
+    });
   });
 
   return divRegister;
