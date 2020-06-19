@@ -50,7 +50,7 @@ export const signingInGoogle = () => {
               });
             })
             .catch((err) => {
-              console.error('error al cargar iamgen google', err.statusText);
+              console.error('error al cargar imagen google', err.statusText);
             });
         } else {
           // Armar estructura de usuario para la insercion en la tabla users
@@ -84,28 +84,7 @@ export const signingInGoogle = () => {
     });
 };
 
-// Registrar Usuario
-export const registerUser = (name, email, password) =>
-  // metodo para la creación de la autentificacion en firebase - result -> resultado de mi registro
-  signUp(email, password).then((result) => {
-    // Armar estructura de usuario para la insercion en la tabla users
-    const jsonUser = {
-      fullname: name,
-      aboutMe: 'Cuenta un poco sobre ti',
-      location: 'Ciudad, País',
-      image: 'foto',
-    };
 
-    // Insertar registro en la tabla users
-    createData(table_users, result.user.uid, jsonUser);
-    console.log('registro exitoso', result);
-
-    // Enviar correo de verificación
-    verificationEmail().then(() => {
-      console.log('correo enviado');
-      // retornar a la vista login
-    });
-  });
 
 const verifiedEmailResult = (result) => {
   if (result) {

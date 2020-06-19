@@ -9,19 +9,26 @@ const changeView = (route) => {
   switch (route) {
     case '#/login':
     // En el container con el append se añade un elemento al DOM (más no una cadena)
-    { return container.appendChild(components.login()); }
+    {
+      window.location.hash = '/login';
+      return container.appendChild(components.login());
+    }
     case '#/register':
-    { return container.appendChild(components.register()); }
+    {
+      window.location.hash = '/register';
+      return container.appendChild(components.register());
+    }
     case '#/home':
-    { return container.appendChild(components.home()); }
-    case '#/notFound':
-    { return container.appendChild(components.notFound()); }
+    {
+      window.location.hash = '/home';
+      return container.appendChild(components.home());
+    }
     default:
-    { window.location.hash = '/login';
-      break;
+    {
+      window.location.hash = '/login';
+      return container.appendChild(components.login());
     }
   }
-  return (route);
 };
 
 export { changeView };

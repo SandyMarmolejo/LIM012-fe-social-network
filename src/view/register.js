@@ -1,5 +1,4 @@
-import { registerUser } from '../view-controller/sigin-controller.js';
-
+import { registerUser } from '../view-controller/register-controller.js';
 
 const register = () => {
   const viewRegister = `
@@ -35,34 +34,6 @@ const register = () => {
   divRegister.innerHTML = viewRegister;
   divRegister.classList.add('login');
 
-  // const getName = () => document.getElementById('txtNameSignUp').value;
-
-  // const getEmail = () => document.getElementById('txtEmailSignUp').value;
-
-  // const getPassword = () => document.getElementById('txtPasswordSignUp').value;
-
-  // const sendData = divRegister.querySelector('#formRegister');
-  // sendData.addEventListener('submit', () => {
-  //   const nameEntered = getName();
-  //   localStorage.name = nameEntered;
-
-  //   const emailEntered = getEmail();
-  //   localStorage.email = emailEntered;
-
-  //   const passwordEntered = getPassword();
-  //   localStorage.password = passwordEntered;
-
-  //   // console.log(`nombre=${nameEntered}email=${emailEntered}contraseña=${passwordEntered}`);
-
-  //   firebase.auth().createUserWithEmailAndPassword(emailEntered, passwordEntered)
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       alert(errorCode, errorMessage);
-  //     });
-  // });
-
-
   const btnRegister = divRegister.querySelector('#btnRegister');
 
   btnRegister.addEventListener('click', () => {
@@ -71,17 +42,15 @@ const register = () => {
     const txtPassword = divRegister.querySelector('#txtPasswordSignUp').value;
 
     registerUser(txtName, txtEmail, txtPassword)
-    .then(() => {
-      document.getElementById('divErrorRegister').classList.add("hide");
-
-      document.getElementById('divSuccefullyRegister').classList.remove("hide");
-      document.getElementById('divSuccefullyRegister').classList.add("show");
-    }).catch(()=>{
-      document.getElementById('divSuccefullyRegister').classList.add("hide");
-
-      document.getElementById('divErrorRegister').classList.remove("hide");
-      document.getElementById('divErrorRegister').classList.add("show");
-    });
+      .then(() => {
+        document.getElementById('divErrorRegister').classList.add("hide");
+        document.getElementById('divSuccefullyRegister').classList.remove("hide");
+        document.getElementById('divSuccefullyRegister').classList.add("show");
+      }).catch(() => {
+        document.getElementById('divSuccefullyRegister').classList.add("hide");
+        document.getElementById('divErrorRegister').classList.remove("hide");
+        document.getElementById('divErrorRegister').classList.add("show");
+      });
   });
 
   return divRegister;

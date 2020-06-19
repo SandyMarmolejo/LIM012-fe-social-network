@@ -1,6 +1,6 @@
 import { signingIn, signingInGoogle } from '../view-controller/sigin-controller.js';
-import { changeView } from '../view-controller/route.js';
-import { getUserInfo } from '../view-controller/home-controller.js';
+import { changeView } from '../view-controller/route-controller.js';
+import { getUserInfo } from '../view-controller/login-controller.js';
 
 const login = () => {
   const viewLogin = `
@@ -62,10 +62,7 @@ const login = () => {
   btnLogin.addEventListener('click', () => {
     const txtEmail = divLogin.querySelector('#txtLoginEmail').value;
     const txtPassword = divLogin.querySelector('#txtloginPassword').value;
-
-    // console.log('txtEmail',txtEmail);
-    // console.log('txtPassword',txtPassword);
-
+    
     signingIn(txtEmail, txtPassword).then(() => {
       getUserInfo().then(() => {
         changeView('#/home');

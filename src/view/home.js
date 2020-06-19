@@ -1,8 +1,11 @@
 
 
 export default () => {
-  const userName = localStorage.getItem('name');
-  const userPhoto = localStorage.getItem('userphoto');
+  const userName = localStorage.getItem('fullName');
+  const userPhoto = localStorage.getItem('userPhoto');
+  const aboutMe = localStorage.getItem('aboutMe');
+  const location = localStorage.getItem('location');
+
   const viewHome = document.createElement('div');
   viewHome.classList.add('home');
   viewHome.innerHTML = `    
@@ -14,7 +17,8 @@ export default () => {
 <main class="contenido">
     <p class="user-name">${userName}</p>
     <img class="img-user" src="${userPhoto}"/>
-    <img src="./img/alternativa.png">
+    <p class="user-name">${aboutMe}</p>
+    <p class="user-name">${location}</p>
 </main>
 <aside class="sidebar">
 <h3>cajita de post</h3>
