@@ -14,11 +14,10 @@ export const registerUser = (name, email, password) => {
       fullName: name,
       aboutMe: 'Cuenta un poco sobre ti',
       location: 'Ciudad, País',
-      image: 'images\\defaultAvatar.jpg',
+      image: 'images\\defaultAvatarMixto.jpg',
     };
 
     // Insertar registro en la tabla users
-    debugger;
     createData(table_users, result.user.uid, jsonUser);
     console.log('registro exitoso', result);
 
