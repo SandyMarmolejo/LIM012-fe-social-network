@@ -33,42 +33,6 @@ const profile = () => {
   // Añadimos una cadena de texto
   divProfile.innerHTML = viewProfile;
   divProfile.classList.add('profile');
-
-
-  //  const createProfileInfo = (id) => {
-  //   firebase.firestore().collection('users').doc(id).set({
-  //     aboutMe: 'Cuenta un poco sobre ti',
-  //     location: 'Ciudad, País',
-  //   });
-  // };
-
-  //  const getProfileInfo = userId => firebase.firestore().collection('users').doc(userId).get();
-
-  // export const updateProfileInfo = (userId, description, place) => firebase.firestore().collection('users').doc(userId).update({
-  //   aboutMe: description,
-  //   location: place,
-  // });
 };
 
-// Creacion de los comentarios en los post publicados
-
-// const publishComment = (userName, comment, idPost, date, userId) => firebase.firestore().collection('comments').add({
-//   user: userName,
-//   comment: comment,
-//   idPost: idPost,
-//   time: date,
-//   userId: userId,
-// });
-
-// const getAllComments = (callback, id) => firebase.firestore().collection('comments')
-//   .where('idPost', '==', id)
-//   .orderBy('time', 'asc')
-//   .onSnapshot((querySnapshot) => {
-//     const allComments = [];
-//     querySnapshot.forEach((doc) => {
-//       allComments.push({ id: doc.id, ...doc.data() });
-//     });
-//     callback(allComments);
-//   });
-
-// export const updateComment = (id, comment) => firebase.firestore().collection('comments').doc(id).update({ comment: comment });
+export default profile;
