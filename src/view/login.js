@@ -62,7 +62,7 @@ const login = () => {
   btnLogin.addEventListener('click', () => {
     const txtEmail = divLogin.querySelector('#txtLoginEmail').value;
     const txtPassword = divLogin.querySelector('#txtloginPassword').value;
-    
+
     signingIn(txtEmail, txtPassword).then(() => {
       getUserInfo().then(() => {
         changeView('#/home');

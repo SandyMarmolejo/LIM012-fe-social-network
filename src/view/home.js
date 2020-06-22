@@ -1,15 +1,16 @@
 import { changeView } from '../view-controller/route-controller.js';
 import { user } from '../firebase-controller/auth-controller.js';
+import { addPost, signOut } from '../view-controller/home-controller.js';
 
-export default () => {
-const userName = localStorage.getItem('fullName');
-const userPhoto = localStorage.getItem('userPhoto');
-const aboutMe = localStorage.getItem('aboutMe');
-const location = localStorage.getItem('location');
+export default (posts) => {
+  const userName = localStorage.getItem('fullName');
+  const userPhoto = localStorage.getItem('userPhoto');
+  const aboutMe = localStorage.getItem('aboutMe');
+  const location = localStorage.getItem('location');
 
-const viewHome = document.createElement('div');
-viewHome.classList.add('home');
-viewHome.innerHTML = `
+  const viewHome = document.createElement('div');
+  viewHome.classList.add('home');
+  viewHome.innerHTML = `
 <div class="contenedor">
   <header class="header">
     <nav>
@@ -29,81 +30,56 @@ viewHome.innerHTML = `
     <textarea id="txtPost" rows="4" cols="50" placeholder="¿Qué quieres compartir?"></textarea>
     <div class="content-privacy">
       <select id="ddlStatusPrivacy">
-        <option value="Pu">Público</option>
-        <option value="Pr">Privado</option>
+        <option id="public" value="public">Público</option>
+        <option id="private "value="private">Privado</option>
       </select>
       <p>
-      <button id="btnSelectImage" class="select-image"></button>
-      </p>
-      <p>
+      <input type="file" id="txtFile"/>
       <button id="btnPost" class="btn-post-submit">Compartir</button>
-      </p>
       <ul id="ulPosts"></ul>
+      </p>
     </div>
   </aside>
 </div>`;
 
+  const ulPosts = viewHome.querySelector('#ulPosts');
+  ulPosts.innerHTML = '';
 
-// cerrar sesión
-const btnSignOut = viewHome.querySelector('#btnSignOut');
-btnSignOut.addEventListener('click', () => {
-  firebase.auth().signOut().then(() => {
-    changeView('#/login');
-  });
-});
-
-const btnPost = viewHome.querySelector('#btnPost');
-btnPost.addEventListener('click', () => {
-
- const statusPrivacy = document.getElementById("ddlStatusPrivacy").value;
- const post = document.getElementById("txtPost").value;
-
- if(post.length > 0) {
-  const currentUser = user();
-  var postJson = {
-    userId: currentUser.uid,
-    userName: userName,
-    statusPrivacy: statusPrivacy,
-    post: post
-  };
- 
-  firebase.firestore().collection('posts').add(postJson).then(() => {
-   document.getElementById("txtPost").value = "";
-
- firebase.firestore().collection('posts')
-.onSnapshot((posts) => {
-  const allPosts = [];
   posts.forEach((post) => {
-    allPosts.push(post.data());
-  });
-
-  const ulPosts = viewHome.querySelector('#ulPosts')
-
-  allPosts.forEach((post) =>{
     const liNombre = document.createElement('li');
-        const textNombre = document.createTextNode(post.post);
-        liNombre.appendChild(textNombre);
-        ulPosts.appendChild(liNombre);
-  })
+    const textNombre = document.createTextNode(post.text);
 
- 
-});
+    /* if(post.imagePath !== ''){
+  const img = document.createElement('img');
+} */
 
+    liNombre.appendChild(textNombre);
+    ulPosts.appendChild(liNombre);
   });
- }else {
-   alert('Completar texto para compartir');
- }
 
-})
+  // cerrar sesión
+  const btnSignOut = viewHome.querySelector('#btnSignOut');
 
-return viewHome;
+  btnSignOut.addEventListener('click', () => {
+    signOut().then(() => {
+      changeView('#/login');
+    });
+  });
+
+  const btnPost = viewHome.querySelector('#btnPost');
+  btnPost.addEventListener('click', () => {
+    const statusPrivacy = document.getElementById('ddlStatusPrivacy').value;
+    const textPost = document.getElementById('txtPost').value;
+
+    if (textPost.length > 0) {
+      addPost(userName, statusPrivacy, textPost, '').then(() => {
+        document.getElementById('txtPost').value = '';
+      });
+    } else {
+      alert('Completar texto para compartir');
+    }
+  });
+
+  // /loadAllPosts();
+  return viewHome;
 };
-
-//tareas a investigar
-//como publicar un post en firebase 
-//como editar post
-//como agregar imagen a post
-//como eliminar un post en firebase
-//como añadir comentarios en post
-//como ver todos posts publicos y privados 
-//editar perfil 

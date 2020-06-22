@@ -1,4 +1,5 @@
 import { components } from '../view/index.js';
+import { getAllPosts } from '../view-controller/home-controller.js';
 
 // Cambio de vistas, para relacionar los view con main (window.location.hash)
 const changeView = (route) => {
@@ -20,8 +21,17 @@ const changeView = (route) => {
     }
     case '#/home':
     {
-      window.location.hash = '/home';
-      return container.appendChild(components.home());
+      return getAllPosts((posts) => {
+        const arrayPosts = [];
+        posts.forEach((post) => {
+          if (post.statusPrivacy === 'public') {
+            arrayPosts.push(post);
+          }
+        });
+        container.innerHTML = '';
+        window.location.hash = '/home';
+        return container.appendChild(components.home(arrayPosts));
+      });
     }
     default:
     {
