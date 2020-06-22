@@ -1,17 +1,13 @@
 const notFound = () => {
-const viewNotFound = `
+  const viewNotFound = `
 <div class="mistake">
   <div class="body-mistake">
     <h2>Oops!, Pagina no encontrada...</h2>
     <p>Se produjo un error inesperado. </p>
   </div>
-  <img src="../css/images/notfound.jpg" alt="">
+  <img src="../images/notfound.jpg" alt="">
 </div>
   `;
-
-
-
-
 
   // Creando un elemento nodo de tipo div
   const divNotFound = document.createElement('div');
@@ -19,6 +15,6 @@ const viewNotFound = `
   divNotFound.innerHTML = viewNotFound;
 
   return divNotFound;
-  };
+};
 
-  export default notFound;
+export default notFound;
