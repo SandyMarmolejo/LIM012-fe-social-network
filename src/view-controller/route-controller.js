@@ -1,4 +1,5 @@
 import { components } from '../view/index.js';
+import { getAllPosts } from '../view-controller/home-controller.js';
 
 // Cambio de vistas, para relacionar los view con main (window.location.hash)
 const changeView = (route) => {
@@ -9,19 +10,35 @@ const changeView = (route) => {
   switch (route) {
     case '#/login':
     // En el container con el append se añade un elemento al DOM (más no una cadena)
-    { return container.appendChild(components.login()); }
+    {
+      window.location.hash = '/login';
+      return container.appendChild(components.login());
+    }
     case '#/register':
-    { return container.appendChild(components.register()); }
+    {
+      window.location.hash = '/register';
+      return container.appendChild(components.register());
+    }
     case '#/home':
-    { return container.appendChild(components.home()); }
-    case '#/notFound':
-    { return container.appendChild(components.notFound()); }
+    {
+      return getAllPosts((posts) => {
+        const arrayPosts = [];
+        posts.forEach((post) => {
+          if (post.statusPrivacy === 'public') {
+            arrayPosts.push(post);
+          }
+        });
+        container.innerHTML = '';
+        window.location.hash = '/home';
+        return container.appendChild(components.home(arrayPosts));
+      });
+    }
     default:
-    { window.location.hash = '/login';
-      break;
+    {
+      window.location.hash = '/login';
+      return container.appendChild(components.login());
     }
   }
-  return (route);
 };
 
 export { changeView };

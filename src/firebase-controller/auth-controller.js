@@ -32,17 +32,6 @@ export const validation = callback => firebase.auth().onAuthStateChanged((user) 
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
 // export const validation = callback => firebase.auth().onAuthStateChanged((user) => {
 //   let route = '#/signin';
 //   if (window.location.hash === '#/signup') route = '#/signup';
@@ -59,8 +48,6 @@ export const validation = callback => firebase.auth().onAuthStateChanged((user) 
 //   }
 //   return callback(route);
 // });
-
-
 
 
 // // actualizar nombre de usuario
