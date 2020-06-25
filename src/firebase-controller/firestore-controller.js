@@ -1,6 +1,6 @@
 
-
 export const createData = (table, id, json) => {
+  // Insertar tabla
   console.log('table', table);
   console.log('id', id);
   console.log('json', json);
@@ -8,6 +8,7 @@ export const createData = (table, id, json) => {
 };
 
 export const getData = (table, id) => {
+  // Insertar data a la tabla
   const docRef = firebase.firestore().collection(table).doc(id);
   return docRef.get();
 };

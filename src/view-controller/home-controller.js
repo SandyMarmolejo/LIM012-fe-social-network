@@ -10,14 +10,14 @@ export const getAllPosts = callback => firebase.firestore().collection('posts')
     callback(allPosts);
   });
 
-export const addPost = (userName, statusPrivacy, textPost, imagePath) => {
+export const addPost = (userName, statusPrivacy, textPost, imageContent) => {
   const currentUser = user();
   const newPostObject = {
     userId: currentUser.uid,
-    userName,
-    statusPrivacy,
+    userName: userName,
+    statusPrivacy: statusPrivacy,
     text: textPost,
-    imagePath,
+    imageContent: imageContent,
     publishTime: new Date().toLocaleString(),
     likes: [],
     comments: [],

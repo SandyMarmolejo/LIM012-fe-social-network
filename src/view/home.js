@@ -3,13 +3,16 @@ import { user } from '../firebase-controller/auth-controller.js';
 import { addPost, signOut } from '../view-controller/home-controller.js';
 
 export default (posts) => {
+  // Almacenamiento local de datos y método que retorna el valor asociada con la lista asociada al obj
   const userName = localStorage.getItem('fullName');
   const userPhoto = localStorage.getItem('userPhoto');
   const aboutMe = localStorage.getItem('aboutMe');
   const location = localStorage.getItem('location');
 
+  // Creando un elemento nodo de tipo div
   const viewHome = document.createElement('div');
   viewHome.classList.add('home');
+  // Añadimos una cadena de texto
   viewHome.innerHTML = `
 <div class="contenedor">
   <header class="header">
@@ -28,6 +31,7 @@ export default (posts) => {
   </main>
   <aside class="sidebar">
     <textarea id="txtPost" rows="4" cols="50" placeholder="¿Qué quieres compartir?"></textarea>
+    <img id="imgPost" style="width:200px; height:100px;">
     <div class="content-privacy">
       <select id="ddlStatusPrivacy">
         <option id="public" value="public">Público</option>
@@ -46,15 +50,20 @@ export default (posts) => {
   ulPosts.innerHTML = '';
 
   posts.forEach((post) => {
-    const liNombre = document.createElement('li');
-    const textNombre = document.createTextNode(post.text);
+    const liPost = document.createElement('li');
 
-    /* if(post.imagePath !== ''){
-  const img = document.createElement('img');
-} */
+    if (post.text.trim().length > 0) {
+      const textPost = document.createTextNode(post.text);
+      liPost.appendChild(textPost);
+    }
 
-    liNombre.appendChild(textNombre);
-    ulPosts.appendChild(liNombre);
+    if (post.imageContent.length > 0) {
+      const imagePost = document.createElement("IMG");
+      imagePost.src = post.imageContent;
+      liPost.appendChild(imagePost);
+    }
+
+    ulPosts.appendChild(liPost);
   });
 
   // cerrar sesión
@@ -70,14 +79,32 @@ export default (posts) => {
   btnPost.addEventListener('click', () => {
     const statusPrivacy = document.getElementById('ddlStatusPrivacy').value;
     const textPost = document.getElementById('txtPost').value;
+    const imageContent = document.getElementById('imgPost').src;
 
-    if (textPost.length > 0) {
-      addPost(userName, statusPrivacy, textPost, '').then(() => {
+    if (textPost.trim().length > 0 || imageContent.trim().length > 0) {
+      addPost(userName, statusPrivacy, textPost, imageContent).then(() => {
         document.getElementById('txtPost').value = '';
       });
     } else {
       alert('Completar texto para compartir');
     }
+  });
+
+
+  // Subiendo imagen
+
+  const btnSelectFile = viewHome.querySelector('#txtFile');
+  btnSelectFile.addEventListener('change', (e) => {
+    const input = e.target;
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      const imageContent = reader.result;
+      const imgPost = document.getElementById('imgPost');
+      imgPost.src = imageContent;
+    };
+
+    reader.readAsDataURL(input.files[0]);
   });
 
   // /loadAllPosts();
