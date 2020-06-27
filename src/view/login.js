@@ -63,14 +63,7 @@ const login = () => {
     const txtEmail = divLogin.querySelector('#txtLoginEmail').value;
     const txtPassword = divLogin.querySelector('#txtloginPassword').value;
 
-    signingIn(txtEmail, txtPassword).then(() => {
-      getUserInfo().then(() => {
-        changeView('#/home');
-      });
-    }).catch((e) => {
-      console.log(e);
-      document.getElementById('divErrorLogin').classList.remove('hide');
-    });
+    signingIn(txtEmail, txtPassword);
   });
 
   btnLogInFacebook.addEventListener('click', () => {
