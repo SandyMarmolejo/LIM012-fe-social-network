@@ -1,4 +1,4 @@
-import { changeView } from './view-controller/route-controller.js';
+import { changeView } from './view-controller/route.js';
 
 const init = () => {
   // Para que se haga un cambio cuando se recarga la página

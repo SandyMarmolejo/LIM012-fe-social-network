@@ -1,4 +1,5 @@
-import { registerUser } from '../view-controller/register-controller.js';
+import { registerUser }  from '../view-controller/sigin-controller.js';
+
 
 const register = () => {
   const viewRegister = `
@@ -13,10 +14,6 @@ const register = () => {
   </form>
   <div class="login-bwn">
     <input type="submit" value="Regístrate" id="btnRegister">
-    <div id="divSuccefullyRegister" class="hide">
-      <h4>Te hemos enviado un correo. </h4>
-    </div>
-    <div id="divErrorRegister" class="hide"><h4>Ha ocurrido un error, por favor reintentalo. </h4></div>
   </div>
   <div class="login-bottom">
    
@@ -34,23 +31,47 @@ const register = () => {
   divRegister.innerHTML = viewRegister;
   divRegister.classList.add('login');
 
+  // const getName = () => document.getElementById('txtNameSignUp').value;
+
+  // const getEmail = () => document.getElementById('txtEmailSignUp').value;
+
+  // const getPassword = () => document.getElementById('txtPasswordSignUp').value;
+
+  // const sendData = divRegister.querySelector('#formRegister');
+  // sendData.addEventListener('submit', () => {
+  //   const nameEntered = getName();
+  //   localStorage.name = nameEntered;
+
+  //   const emailEntered = getEmail();
+  //   localStorage.email = emailEntered;
+
+  //   const passwordEntered = getPassword();
+  //   localStorage.password = passwordEntered;
+
+  //   // console.log(`nombre=${nameEntered}email=${emailEntered}contraseña=${passwordEntered}`);
+
+  //   firebase.auth().createUserWithEmailAndPassword(emailEntered, passwordEntered)
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       alert(errorCode, errorMessage);
+  //     });
+  // });
+
+
   const btnRegister = divRegister.querySelector('#btnRegister');
 
   btnRegister.addEventListener('click', () => {
-    const txtName = divRegister.querySelector('#txtNameSignUp').value;
-    const txtEmail = divRegister.querySelector('#txtEmailSignUp').value;
-    const txtPassword = divRegister.querySelector('#txtPasswordSignUp').value;
+    const txtName =  divRegister.querySelector('#txtNameSignUp').value;
+    const txtEmail =  divRegister.querySelector('#txtEmailSignUp').value;
+    const txtPassword =  divRegister.querySelector('#txtPasswordSignUp').value;
+    
+    console.log('txtName',txtName);
+    console.log('txtEmail',txtName);
+    console.log('txtPassword',txtName);
+    
+    registerUser(txtName, txtEmail, txtPassword);
 
-    registerUser(txtName, txtEmail, txtPassword)
-      .then(() => {
-        document.getElementById('divErrorRegister').classList.add("hide");
-        document.getElementById('divSuccefullyRegister').classList.remove("hide");
-        document.getElementById('divSuccefullyRegister').classList.add("show");
-      }).catch(() => {
-        document.getElementById('divSuccefullyRegister').classList.add("hide");
-        document.getElementById('divErrorRegister').classList.remove("hide");
-        document.getElementById('divErrorRegister').classList.add("show");
-      });
   });
 
   return divRegister;
