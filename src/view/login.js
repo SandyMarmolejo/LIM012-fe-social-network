@@ -1,4 +1,4 @@
-import {signingIn , signingInGoogle} from '../view-controller/sigin-controller.js';
+import { signingIn, signingInGoogle } from '../view-controller/sigin-controller.js';
 
 const login = () => {
   const viewLogin = `
@@ -16,8 +16,10 @@ const login = () => {
 
       <div class="clear"> </div>
   </div>
+  
   <div class="login-bwn">
     <input type="submit" value="Log in" id="btnLogin">
+    <div id="divErrorLogin" class="hide"><h4>Ha ocurrido un error, por favor reintentalo. </h4></div>
   </div>
   <div class="login-bottom">
     <p>O ingresa con</p>
@@ -56,15 +58,10 @@ const login = () => {
 
 
   btnLogin.addEventListener('click', () => {
-    const txtEmail =  divLogin.querySelector('#txtLoginEmail').value;
-    const txtPassword =  divLogin.querySelector('#txtloginPassword').value;
+    const txtEmail = divLogin.querySelector('#txtLoginEmail').value;
+    const txtPassword = divLogin.querySelector('#txtloginPassword').value;
 
-    // console.log('txtEmail',txtEmail);
-    // console.log('txtPassword',txtPassword);
-
-    signingIn(txtEmail,txtPassword);
-    
-
+    signingIn(txtEmail, txtPassword);
   });
 
   btnLogInFacebook.addEventListener('click', () => {

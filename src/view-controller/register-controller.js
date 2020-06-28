@@ -14,7 +14,7 @@ export const registerUser = (name, email, password) => {
       fullName: name,
       aboutMe: 'Cuenta un poco sobre ti',
       location: 'Ciudad, País',
-      image: 'images\\defaultAvatarMixto.jpg',
+      image: 'perfil/default.jpg',
     };
 
     // Insertar registro en la tabla users

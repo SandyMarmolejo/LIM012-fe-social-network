@@ -1,4 +1,5 @@
 import { components } from '../view/index.js';
+import { getAllPosts } from '../firebase-controller/firestore-controller.js';
 
 // Cambio de vistas, para relacionar los view con main (window.location.hash)
 const changeView = (route) => {
@@ -9,19 +10,41 @@ const changeView = (route) => {
   switch (route) {
     case '#/login':
     // En el container con el append se añade un elemento al DOM (más no una cadena)
-    { return container.appendChild(components.login()); }
+    {
+      window.location.hash = '/login';
+      return container.appendChild(components.login());
+    }
     case '#/register':
-    { return container.appendChild(components.register()); }
-    case '#/profile':
-    { return container.appendChild(components.profile()); }
-    case '#/notFound':
-    { return container.appendChild(components.notFound()); }
+    {
+      window.location.hash = '/register';
+      return container.appendChild(components.register());
+    }
+    case '#/home':
+    {
+
+      window.location.hash = '/home';
+
+      return getAllPosts((posts) => {
+        //  console.log(posts);
+        const listPosts = [];
+        
+        posts.forEach((post) => {
+          if (post.statusPrivacy === 'public') {
+            listPosts.push(post);
+          }
+        });
+
+        container.innerHTML = '';  
+        return container.appendChild(components.home(listPosts));
+      });
+
+    }
     default:
-    { window.location.hash = '/login';
-      break;
+    {
+      window.location.hash = '/login';
+      return container.appendChild(components.login());
     }
   }
-  return (route);
 };
 
 export { changeView };

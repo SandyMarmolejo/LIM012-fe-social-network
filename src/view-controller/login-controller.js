@@ -5,16 +5,17 @@ import { storageRef, getDownloadURL } from '../firebase-controller/storage-contr
 export const getUserInfo = () => {
   const currentUser = user();
   return getUser(currentUser.uid).then((doc) => {
+
+    localStorage.setItem('idUser', currentUser.uid);
     localStorage.setItem('fullName', doc.data().fullName);
-    // localStorage.setItem('userPhoto', doc.data().image);
     localStorage.setItem('aboutMe', doc.data().aboutMe);
     localStorage.setItem('location', doc.data().location);
+    localStorage.setItem('image', doc.data().image);
 
     const imgstorageRef = doc.data().image;
     const refStorage = storageRef(imgstorageRef);
 
     return getDownloadURL(refStorage).then((url) => {
-      console.log(url);
       localStorage.setItem('userPhoto', url);
     });
 
