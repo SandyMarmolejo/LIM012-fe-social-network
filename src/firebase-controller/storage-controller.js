@@ -10,3 +10,6 @@ export const put = (storage, file) => storage.put(file);
 
 //  obterner Url para descarga de archivo
 export const getDownloadURL = storageRef => storageRef.getDownloadURL();
+
+export const getImageURL = storageRef =>  { storageRef.getDownloadURL().then((url) => { return url;  });}
+

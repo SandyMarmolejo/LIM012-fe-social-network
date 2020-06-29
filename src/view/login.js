@@ -1,6 +1,4 @@
 import { signingIn, signingInGoogle } from '../view-controller/sigin-controller.js';
-import { changeView } from '../view-controller/route-controller.js';
-import { getUserInfo } from '../view-controller/login-controller.js';
 
 const login = () => {
   const viewLogin = `
@@ -63,14 +61,7 @@ const login = () => {
     const txtEmail = divLogin.querySelector('#txtLoginEmail').value;
     const txtPassword = divLogin.querySelector('#txtloginPassword').value;
 
-    signingIn(txtEmail, txtPassword).then(() => {
-      getUserInfo().then(() => {
-        changeView('#/home');
-      });
-    }).catch((e) => {
-      console.log(e);
-      document.getElementById('divErrorLogin').classList.remove('hide');
-    });
+    signingIn(txtEmail, txtPassword);
   });
 
   btnLogInFacebook.addEventListener('click', () => {

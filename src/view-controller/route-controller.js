@@ -1,5 +1,5 @@
 import { components } from '../view/index.js';
-import { getAllPosts } from '../view-controller/home-controller.js';
+import { getAllPosts } from '../firebase-controller/firestore-controller.js';
 
 // Cambio de vistas, para relacionar los view con main (window.location.hash)
 const changeView = (route) => {
@@ -21,17 +21,23 @@ const changeView = (route) => {
     }
     case '#/home':
     {
+
+      window.location.hash = '/home';
+
       return getAllPosts((posts) => {
-        const arrayPosts = [];
+        //  console.log(posts);
+        const listPosts = [];
+        
         posts.forEach((post) => {
           if (post.statusPrivacy === 'public') {
-            arrayPosts.push(post);
+            listPosts.push(post);
           }
         });
-        container.innerHTML = '';
-        window.location.hash = '/home';
-        return container.appendChild(components.home(arrayPosts));
+
+        container.innerHTML = '';  
+        return container.appendChild(components.home(listPosts));
       });
+
     }
     default:
     {

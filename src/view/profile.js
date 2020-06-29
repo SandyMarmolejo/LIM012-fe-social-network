@@ -1,38 +1,47 @@
-
-
-const profile = () => {
-  const viewProfile = `
-    <div class="contenedor">
-  <header class="header">
-    <nav>
-      <a href="#" class="profile-menu" id="profileMenu">Perfil</a>
-      <button class="btnSignOut" id="btnSignOut" href="#/login">Cerrar sesión</i>
-    </nav>
-  </header>
-  <main class="contenido">
-    <div id="profileInfo">
-    <p class="user-name">${userName}</p>
-    <img id="profilePhoto" class="img-user" src="${userPhoto || './images/avatardefaultblack.png'}" alt="">
-    <p class="user-name">${aboutMe}</p>
-    <p class="user-name">${location}</p>
+export default () => {
+  const dataCurrent = firebase.auth().currentUser;
+  const viewProfile = document.createElement('div');
+  viewProfile.classList.add('wrapper-profile');
+  viewProfile.innerHTML = `
+    <div class="card">
+    <div class="card-image">
+    <br>
+    <section class="box-picture">
+    <img  class="user-foto" src="${dataCurrent.photoURL}"  style="width:100px; height:100px; border-radius:50%;  margin:auto; left:0; top:0; rigth:0; bottom:0;">
+  </section>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+    <div class="card-text">
+      <span class="date">4 days ago</span>
+      <h2 class="user-name">${dataCurrent.displayName}</h2>
+      <p>${dataCurrent.email}</p>
     </div>
-  </main>
-  <aside class="sidebar">
-    <textarea rows="4" cols="50" placeholder="¿Qué quieres compartir?"></textarea>
-
-      <div class="profile-edit">
-      <button id="btnCancel" class="btn-profile-cancel hide">Cancelar</button>
-      <button id="btnSave" class="btn-profile-save hide">Guardar</button>
+    <div class="card-stats">
+      <div class="stat">
+        <div class="value">40</div>
+        <div class="type">publicaciones</div>
+      </div>
+      <div class="stat border">
+        <div class="value">5123</div>
+        <div class="type">views</div>
+      </div>
+      <div class="stat">
+        <div class="value">32</div>
+        <div class="type">comentarios</div>
       </div>
     </div>
-  </aside>
-</div>`;
+    </div>
+    <a class="text-registro" id="btnViewLogIn" href="#/home">HOME</a>
+  
+        `;
 
-  // Creando un elemento nodo de tipo div
-  const divProfile = document.createElement('div');
-  // Añadimos una cadena de texto
-  divProfile.innerHTML = viewProfile;
-  divProfile.classList.add('profile');
+  return viewProfile;
 };
-
-export default profile;

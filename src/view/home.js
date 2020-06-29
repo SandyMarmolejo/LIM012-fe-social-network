@@ -1,6 +1,4 @@
-import { changeView } from '../view-controller/route-controller.js';
-import { user } from '../firebase-controller/auth-controller.js';
-import { addPost, signOut } from '../view-controller/home-controller.js';
+import { uploadImagePerfil, addPost, signOutSession } from '../view-controller/home-controller.js';
 
 export default (posts) => {
   // Almacenamiento local de datos y método que retorna el valor asociada con la lista asociada al obj
@@ -23,89 +21,160 @@ export default (posts) => {
   </header>
   <main class="contenido">
     <div id="profileInfo">
-    <p class="user-name">${userName}</p>
-    <img id="profilePhoto" class="img-user" src="${userPhoto || './images/avatardefaultblack.png'}" alt="">
-    <p class="user-name">${aboutMe}</p>
-    <p class="user-name">${location}</p>
+      <p class="user-name">${userName}</p>
+      <img id="profilePhoto" class="img-user" src="${userPhoto || './images/avatardefaultblack.png'}" alt="">
+      <input type="submit" value="Cambiar Foto" id="btnImagePerfil">
+      <input type="file" id="inputImagePerfil" style="display:none;"/>
+      <p class="user-name">${aboutMe}</p>
+      <p class="user-name">${location}</p>
     </div>
   </main>
   <aside class="sidebar">
+    
     <textarea id="txtPost" rows="4" cols="50" placeholder="¿Qué quieres compartir?"></textarea>
-    <img id="imgPost" style="width:200px; height:100px;">
+    
+    
+    <img id="imgPost" class="img-user" src="" alt="" style ="width: 200px; height: 250px;">
+    
     <div class="content-privacy">
       <select id="ddlStatusPrivacy">
         <option id="public" value="public">Público</option>
         <option id="private "value="private">Privado</option>
       </select>
       <p>
-      <input type="file" id="txtFile"/>
-      <button id="btnPost" class="btn-post-submit">Compartir</button>
-      <ul id="ulPosts"></ul>
+       
+
+        <input type="submit" value="Subir Foto" id="btnImagePost">
+        <input type="file" id="inputImagePost" style="display:none;"/>
+
+        <button id="btnPost" class="btn-post-submit">Compartir</button>
+       <!--    <ul id="ulPosts"></ul> -->
       </p>
     </div>
   </aside>
+  <div id="container_post">
+  </div>
 </div>`;
 
-  const ulPosts = viewHome.querySelector('#ulPosts');
-  ulPosts.innerHTML = '';
 
-  posts.forEach((post) => {
-    const liPost = document.createElement('li');
+const btnImagePerfil = viewHome.querySelector('#btnImagePerfil');
+const inputImagePerfil = viewHome.querySelector('#inputImagePerfil');
+const profilePhoto = viewHome.querySelector('#profilePhoto');
 
-    if (post.text.trim().length > 0) {
-      const textPost = document.createTextNode(post.text);
-      liPost.appendChild(textPost);
-    }
+const btnImagePost = viewHome.querySelector('#btnImagePost');
+const inputImagePost = viewHome.querySelector('#inputImagePost');
+const imgPost = viewHome.querySelector('#imgPost');
+   
+// cerrar sesión
+const btnSignOut = viewHome.querySelector('#btnSignOut');
+const btnPost = viewHome.querySelector('#btnPost');
 
-    if (post.imageContent.length > 0) {
-      const imagePost = document.createElement("IMG");
-      imagePost.src = post.imageContent;
-      liPost.appendChild(imagePost);
-    }
+// const ulPosts = viewHome.querySelector('#ulPosts');
+const container_post = viewHome.querySelector('#container_post');
 
-    ulPosts.appendChild(liPost);
-  });
+btnSignOut.addEventListener('click', () => {
+  signOutSession();
+});
 
-  // cerrar sesión
-  const btnSignOut = viewHome.querySelector('#btnSignOut');
+btnImagePerfil.addEventListener('click', () => {
+  // Ejecutamos el metodo Click de input type
+  inputImagePerfil.click();
+});
 
-  btnSignOut.addEventListener('click', () => {
-    signOut().then(() => {
-      changeView('#/login');
+
+inputImagePerfil.addEventListener('change', (e) => {
+  // obtener archivo seleccionado
+  const file = e.target.files[0];
+  const reader = new FileReader();
+      
+  reader.onload = () => {
+    //cargar archivo seleccionado
+    const dataURL = reader.result;
+    profilePhoto.src = dataURL;
+  };
+  reader.readAsDataURL(file);
+  
+  //Subir archivo al firebase
+  uploadImagePerfil( file);
+
+});
+
+
+btnImagePost.addEventListener('click', () => {
+  // Ejecutamos el metodo Click de input type
+  inputImagePost.click();
+});
+
+
+inputImagePost.addEventListener('change', (e) => {
+  // obtener archivo seleccionado
+  const file = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    //cargar archivo seleccionado
+    const dataURL = reader.result;
+    imgPost.src = dataURL;
+  };
+  reader.readAsDataURL(file);
+
+});
+
+btnPost.addEventListener('click', () => {
+  const statusPrivacy = document.getElementById('ddlStatusPrivacy').value;
+  const textPost = document.getElementById('txtPost').value;
+
+  if (textPost.length > 0) {
+   
+    //Verificamos si han subido archivo. `${window.origin}/` => 'http://localhost:5000/'
+    let img = imgPost.src == (`${window.origin}/`)? "" : imgPost.src;
+    
+    addPost(userName, statusPrivacy, textPost, img).then(() => {
+      console.log('inserto comentario');
+      document.getElementById('txtPost').value = '';
     });
-  });
 
-  const btnPost = viewHome.querySelector('#btnPost');
-  btnPost.addEventListener('click', () => {
-    const statusPrivacy = document.getElementById('ddlStatusPrivacy').value;
-    const textPost = document.getElementById('txtPost').value;
-    const imageContent = document.getElementById('imgPost').src;
+  } else {
+    alert('Completar texto para compartir');
+  }
 
-    if (textPost.trim().length > 0 || imageContent.trim().length > 0) {
-      addPost(userName, statusPrivacy, textPost, imageContent).then(() => {
-        document.getElementById('txtPost').value = '';
-      });
-    } else {
-      alert('Completar texto para compartir');
-    }
-  });
+});
 
 
-  // Subiendo imagen
+container_post.innerHTML = '';
+posts.forEach((post) => {
 
-  const btnSelectFile = viewHome.querySelector('#txtFile');
-  btnSelectFile.addEventListener('change', (e) => {
-    const input = e.target;
+    //  console.log(post);
 
-    const reader = new FileReader();
-    reader.onload = function () {
-      const imageContent = reader.result;
-      const imgPost = document.getElementById('imgPost');
-      imgPost.src = imageContent;
-    };
+    const div = document.createElement('div');
+    const pNombre = document.createElement('p');
+    const txtPost = document.createElement('textarea');
+    const img = document.createElement('img');
 
-    reader.readAsDataURL(input.files[0]);
-  });
+    div.setAttribute("id", post.id);
+    pNombre.innerHTML = post.userName;
+    txtPost.innerHTML = post.text;
+    img.src = post.imageContent;
+
+    div.appendChild(pNombre);
+    div.appendChild(txtPost);
+    div.appendChild(img);
+    
+    // console.log(post.imageUrl);
+     console.log(div);
+    container_post.appendChild(div);
+
+    //  if(post.imageUrl){
+    //   img.src = post.imageUrl;
+    // } 
+
+  
+    // liNombre.appendChild(textNombre);
+    // ulPosts.appendChild(liNombre);
+    // ulPosts.appendChild(img);
+
+});
+
 
   // /loadAllPosts();
   return viewHome;
