@@ -1,4 +1,5 @@
 import { components } from '../view/index.js';
+import { user } from '../firebase-controller/auth-controller.js';
 import { getAllPosts } from '../firebase-controller/firestore-controller.js';
 
 // Cambio de vistas, para relacionar los view con main (window.location.hash)
@@ -29,7 +30,7 @@ const changeView = (route) => {
         const listPosts = [];
         
         posts.forEach((post) => {
-          if (post.statusPrivacy === 'public') {
+          if (post.statusPrivacy === 'public' || post.userId == user().uid) {
             listPosts.push(post);
           }
         });

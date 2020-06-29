@@ -1,4 +1,7 @@
-import { uploadImagePerfil, addPost, signOutSession } from '../view-controller/home-controller.js';
+import {
+  uploadImagePerfil, addPost, updateLike, updateComment, signOutSession,
+} from '../view-controller/home-controller.js';
+import { user } from '../firebase-controller/auth-controller.js';
 
 export default (posts) => {
   // Almacenamiento local de datos y método que retorna el valor asociada con la lista asociada al obj
@@ -48,7 +51,6 @@ export default (posts) => {
         <input type="file" id="inputImagePost" style="display:none;"/>
 
         <button id="btnPost" class="btn-post-submit">Compartir</button>
-       <!--    <ul id="ulPosts"></ul> -->
       </p>
     </div>
   </aside>
@@ -56,126 +58,164 @@ export default (posts) => {
   </div>
 </div>`;
 
+  const btnImagePerfil = viewHome.querySelector('#btnImagePerfil');
+  const inputImagePerfil = viewHome.querySelector('#inputImagePerfil');
+  const profilePhoto = viewHome.querySelector('#profilePhoto');
+  const btnImagePost = viewHome.querySelector('#btnImagePost');
+  const inputImagePost = viewHome.querySelector('#inputImagePost');
+  const imgPost = viewHome.querySelector('#imgPost');
 
-const btnImagePerfil = viewHome.querySelector('#btnImagePerfil');
-const inputImagePerfil = viewHome.querySelector('#inputImagePerfil');
-const profilePhoto = viewHome.querySelector('#profilePhoto');
+  // cerrar sesión
+  const btnSignOut = viewHome.querySelector('#btnSignOut');
+  const btnPost = viewHome.querySelector('#btnPost');
 
-const btnImagePost = viewHome.querySelector('#btnImagePost');
-const inputImagePost = viewHome.querySelector('#inputImagePost');
-const imgPost = viewHome.querySelector('#imgPost');
-   
-// cerrar sesión
-const btnSignOut = viewHome.querySelector('#btnSignOut');
-const btnPost = viewHome.querySelector('#btnPost');
+  // const ulPosts = viewHome.querySelector('#ulPosts');
+  const container_post = viewHome.querySelector('#container_post');
 
-// const ulPosts = viewHome.querySelector('#ulPosts');
-const container_post = viewHome.querySelector('#container_post');
+  btnSignOut.addEventListener('click', () => {
+    signOutSession();
+  });
 
-btnSignOut.addEventListener('click', () => {
-  signOutSession();
-});
+  btnImagePerfil.addEventListener('click', () => {
+    // Ejecutamos el metodo Click de input type
+    inputImagePerfil.click();
+  });
 
-btnImagePerfil.addEventListener('click', () => {
-  // Ejecutamos el metodo Click de input type
-  inputImagePerfil.click();
-});
+  inputImagePerfil.addEventListener('change', (e) => {
+    // obtener archivo seleccionado
+    const file = e.target.files[0];
+    const reader = new FileReader();
 
+    reader.onload = () => {
+      // cargar archivo seleccionado
+      const dataURL = reader.result;
+      profilePhoto.src = dataURL;
+    };
+    reader.readAsDataURL(file);
 
-inputImagePerfil.addEventListener('change', (e) => {
-  // obtener archivo seleccionado
-  const file = e.target.files[0];
-  const reader = new FileReader();
-      
-  reader.onload = () => {
-    //cargar archivo seleccionado
-    const dataURL = reader.result;
-    profilePhoto.src = dataURL;
-  };
-  reader.readAsDataURL(file);
-  
-  //Subir archivo al firebase
-  uploadImagePerfil( file);
+    // Subir archivo al firebase
+    uploadImagePerfil(file);
+  });
 
-});
+  btnImagePost.addEventListener('click', () => {
+    // Ejecutamos el metodo Click de input type
+    inputImagePost.click();
+  });
 
+  inputImagePost.addEventListener('change', (e) => {
+    // obtener archivo seleccionado
+    const file = e.target.files[0];
+    const reader = new FileReader();
 
-btnImagePost.addEventListener('click', () => {
-  // Ejecutamos el metodo Click de input type
-  inputImagePost.click();
-});
+    reader.onload = () => {
+      // cargar archivo seleccionado
+      const dataURL = reader.result;
+      imgPost.src = dataURL;
+    };
+    reader.readAsDataURL(file);
+  });
 
+  btnPost.addEventListener('click', () => {
+    const statusPrivacy = document.getElementById('ddlStatusPrivacy').value;
+    const textPost = document.getElementById('txtPost').value;
 
-inputImagePost.addEventListener('change', (e) => {
-  // obtener archivo seleccionado
-  const file = e.target.files[0];
-  const reader = new FileReader();
+    if (textPost.length > 0) {
+      // Verificamos si han subido archivo. `${window.origin}/` => 'http://localhost:5000/'
+      const img = imgPost.src == (`${window.origin}/`) ? '' : imgPost.src;
 
-  reader.onload = () => {
-    //cargar archivo seleccionado
-    const dataURL = reader.result;
-    imgPost.src = dataURL;
-  };
-  reader.readAsDataURL(file);
-
-});
-
-btnPost.addEventListener('click', () => {
-  const statusPrivacy = document.getElementById('ddlStatusPrivacy').value;
-  const textPost = document.getElementById('txtPost').value;
-
-  if (textPost.length > 0) {
-   
-    //Verificamos si han subido archivo. `${window.origin}/` => 'http://localhost:5000/'
-    let img = imgPost.src == (`${window.origin}/`)? "" : imgPost.src;
-    
-    addPost(userName, statusPrivacy, textPost, img).then(() => {
-      console.log('inserto comentario');
-      document.getElementById('txtPost').value = '';
-    });
-
-  } else {
-    alert('Completar texto para compartir');
-  }
-
-});
+      addPost(userName, statusPrivacy, textPost, img).then(() => {
+        console.log('inserto comentario');
+        document.getElementById('txtPost').value = '';
+      });
+    } else {
+      alert('Completar texto para compartir');
+    }
+  });
 
 
-container_post.innerHTML = '';
-posts.forEach((post) => {
-
-    //  console.log(post);
-
+  container_post.innerHTML = '';
+  posts.forEach((post) => {
     const div = document.createElement('div');
+    div.setAttribute('id', post.id);
+    div.classList.add('divPost');
+
     const pNombre = document.createElement('p');
+    pNombre.innerHTML = post.userName;
+
+    if (post.statusPrivacy === 'private') {
+      pNombre.innerHTML = `${post.userName}(Privado)`;
+    }
+
+    const pPublishDate = document.createElement('p');
+    pPublishDate.innerHTML = post.publishTime;
+
     const txtPost = document.createElement('textarea');
     const img = document.createElement('img');
-
-    div.setAttribute("id", post.id);
-    pNombre.innerHTML = post.userName;
     txtPost.innerHTML = post.text;
     img.src = post.imageContent;
 
+    const btnAddLike = document.createElement('BUTTON');
+    btnAddLike.innerHTML = 'Me gusta';
+
+    var userLikes = post.likes.filter(like => like == user().uid);
+
+    if (userLikes.length === 0) {
+      btnAddLike.onclick = () => {
+        post.likes.push(user().uid);
+        updateLike(post.id, post);
+      };
+    } else {
+      btnAddLike.disabled = true;
+    }
+
+    const lblLikes = document.createElement('LABEL');
+    const numberLikes = document.createTextNode(`${post.likes.length} likes`);
+    lblLikes.appendChild(numberLikes);
+
+    const txtNewComment = document.createElement('INPUT');
+    txtNewComment.setAttribute('type', 'text');
+    txtNewComment.setAttribute('id', `txt${post.id}`);
+    txtNewComment.placeholder = 'Comenta aqui';
+
+    const btnAddComment = document.createElement('BUTTON');
+    btnAddComment.innerHTML = 'Comentario';
+    btnAddComment.onclick = () => {
+      const txtCommentValue = document.getElementById(`txt${post.id}`).value;
+
+      const comment = {
+        userId: user().uid,
+        userName,
+        text: txtCommentValue,
+      };
+
+      post.comments.push(comment);
+      updateComment(post.id, post);
+    };
+
+    const ulComments = document.createElement('ul');
+    post.comments.forEach((comment) => {
+      const liComment = document.createElement('li');
+
+      const pCommentNombre = document.createElement('p');
+      pCommentNombre.innerHTML = comment.userName;
+
+      const txtComment = document.createTextNode(comment.text);
+      liComment.appendChild(pCommentNombre);
+      liComment.appendChild(txtComment);
+      ulComments.appendChild(liComment);
+    });
+
     div.appendChild(pNombre);
+    div.appendChild(pPublishDate);
     div.appendChild(txtPost);
     div.appendChild(img);
-    
-    // console.log(post.imageUrl);
-     console.log(div);
+    div.appendChild(btnAddLike);
+    div.appendChild(lblLikes);
+    div.appendChild(txtNewComment);
+    div.appendChild(btnAddComment);
+    div.appendChild(ulComments);
     container_post.appendChild(div);
+  });
 
-    //  if(post.imageUrl){
-    //   img.src = post.imageUrl;
-    // } 
-
-  
-    // liNombre.appendChild(textNombre);
-    // ulPosts.appendChild(liNombre);
-    // ulPosts.appendChild(img);
-
-});
-
-
-  // /loadAllPosts();
   return viewHome;
 };

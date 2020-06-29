@@ -32,6 +32,7 @@ export const publishPost = (idUsuario, name, post, image, time, status) => fireb
   comments: []
 });
 
+export const updatePost = (id, post) => firebase.firestore().collection('posts').doc(id).update(post);
 
 export const getAllPosts = callback => firebase.firestore().collection(table_posts)
   .orderBy('publishTime', 'desc')
@@ -51,19 +52,9 @@ export const getAllPosts = callback => firebase.firestore().collection(table_pos
     callback(posts);
   });
 
-
-
-
-
-/********************************************************************************* */
-
-
-export const updatePost = (id, post) => firebase.firestore().collection('posts').doc(id).update({ post: post });
-
-export const updatePrivacy = (id, status) => firebase.firestore().collection('posts').doc(id).update({ privacy: status });
+  export const updatePrivacy = (id, status) => firebase.firestore().collection('posts').doc(id).update({ privacy: status });
 
 // Comentarios
-
 export const publishComment = (userName, comment, idPost, date, userId) => firebase.firestore().collection('comments').add({
   user: userName,
   comment: comment,

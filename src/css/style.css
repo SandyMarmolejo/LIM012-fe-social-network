@@ -512,6 +512,14 @@ body {
   grid-area: sidebar;
 }
 
+.divPost {
+  margin-bottom: 30px;
+}
+
+.btnSignOut {
+  float: right;
+}
+
 @media screen and (max-width: 768px) {
   .contenedor {
     grid-template-areas:
